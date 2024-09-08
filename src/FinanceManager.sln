@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Entities", "Domain.Entities\Domain.Entities.csproj", "{46E63FC3-9BE8-4948-9742-4FF78DF93750}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.Interfaces", "DataAccess.Interfaces\DataAccess.Interfaces.csproj", "{5779B8B2-0C7B-4557-9BB9-030EB4EED9AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntryPoints.TelegramBot", "EntryPoints.TelegramBot\EntryPoints.TelegramBot.csproj", "{8742DC2F-4211-4469-9219-D01FEA577949}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{3E537092-275E-428D-BFB8-DDC7AF2E7BFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{3D3EA030-B7ED-48C4-96BF-B20E60E028C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.Postrges", "DataAccess.Postrges\DataAccess.Postrges.csproj", "{5516D2F0-1E1A-473D-A9CD-4905C3293E3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseCases", "UseCases\UseCases.csproj", "{F8BCC30F-F065-45B2-A3FB-373390D985F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{46E63FC3-9BE8-4948-9742-4FF78DF93750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46E63FC3-9BE8-4948-9742-4FF78DF93750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46E63FC3-9BE8-4948-9742-4FF78DF93750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46E63FC3-9BE8-4948-9742-4FF78DF93750}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5779B8B2-0C7B-4557-9BB9-030EB4EED9AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5779B8B2-0C7B-4557-9BB9-030EB4EED9AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5779B8B2-0C7B-4557-9BB9-030EB4EED9AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5779B8B2-0C7B-4557-9BB9-030EB4EED9AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8742DC2F-4211-4469-9219-D01FEA577949}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8742DC2F-4211-4469-9219-D01FEA577949}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8742DC2F-4211-4469-9219-D01FEA577949}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8742DC2F-4211-4469-9219-D01FEA577949}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E537092-275E-428D-BFB8-DDC7AF2E7BFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E537092-275E-428D-BFB8-DDC7AF2E7BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E537092-275E-428D-BFB8-DDC7AF2E7BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E537092-275E-428D-BFB8-DDC7AF2E7BFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D3EA030-B7ED-48C4-96BF-B20E60E028C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D3EA030-B7ED-48C4-96BF-B20E60E028C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D3EA030-B7ED-48C4-96BF-B20E60E028C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D3EA030-B7ED-48C4-96BF-B20E60E028C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5516D2F0-1E1A-473D-A9CD-4905C3293E3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5516D2F0-1E1A-473D-A9CD-4905C3293E3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5516D2F0-1E1A-473D-A9CD-4905C3293E3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5516D2F0-1E1A-473D-A9CD-4905C3293E3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8BCC30F-F065-45B2-A3FB-373390D985F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8BCC30F-F065-45B2-A3FB-373390D985F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8BCC30F-F065-45B2-A3FB-373390D985F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8BCC30F-F065-45B2-A3FB-373390D985F7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
