@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using AutoMapper;
 using MediatR;
 using Telegram.Bot;
@@ -13,32 +14,51 @@ public class BotClientUpdateHandler : IUpdateHandler
 {
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
-
+    private readonly string[] _commands = new [] { "/сводка" };
+    
     public BotClientUpdateHandler(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
         _mapper = mapper;
     }
 
-    public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
+    public async Task HandleUpdateAsync(ITelegramBotClient botClient,
+        Update update,
+        CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (update.Message != null)
+        
+        var (message, savedText) = update.Type switch
         {
-            await HandleMessage(update.Message);
-        }
-        else if (update.EditedMessage != null)
+            UpdateType.ChannelPost => (update.ChannelPost, "сохранено"),
+            UpdateType.EditedChannelPost => (update.EditedChannelPost, "сохранено снова"),
+            _ => (null, null)
+        };
+        
+        if (message != null)
         {
-            await HandleMessage(update.EditedMessage);
-        }
-        else if (update.ChannelPost != null)
-        {
-            await HandleMessage(update.ChannelPost);
-        }
-        else if (update.EditedChannelPost != null)
-        {
-            await HandleMessage(update.EditedChannelPost);
+            if (IsExpenseRecord(message.Text))
+            {
+                await SaveMessage(message);
+            
+                await botClient.EditMessageTextAsync(message.Chat.Id,
+                    message.MessageId,
+                    message.Text + " - " + savedText,
+                    cancellationToken: cancellationToken);
+            }
+            else
+            {
+                string responseText = "К сожалению твой текст не распознан ни как комманда, ни как запись о расходах. Попробуй еще раз";
+                
+                if (IsCommand(message.Text))
+                {
+                    responseText = await ProcessMessage(message);
+                }
+                
+                await botClient.SendTextMessageAsync(message.Chat.Id,
+                    responseText,
+                    cancellationToken: cancellationToken);
+            }
         }
     }
 
@@ -64,8 +84,22 @@ public class BotClientUpdateHandler : IUpdateHandler
         }
     }
 
-    private async Task HandleMessage(Message message)
+    private async Task<string> ProcessMessage(Message message)
     {
-        await SaveMessage(message);
+        return "Обработано";
+    }
+
+    private bool IsCommand(string command)
+    {
+        if (string.IsNullOrWhiteSpace(command)) return false;
+        command = command.Trim().ToLower();
+        return _commands.Contains(command);
+    }
+    
+    private bool IsExpenseRecord(string expenseRecord)
+    {
+        if (string.IsNullOrWhiteSpace(expenseRecord)) return false;
+        expenseRecord = expenseRecord.Trim().ToLower();
+        return Regex.IsMatch(expenseRecord, @"^#[\w]+[\s]+[\d]+$");
     }
 }

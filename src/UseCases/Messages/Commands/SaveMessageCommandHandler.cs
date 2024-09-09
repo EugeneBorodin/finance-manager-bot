@@ -15,7 +15,7 @@ public class SaveMessageCommandHandler : IRequestHandler<SaveMessageCommand, Gui
     private readonly IServiceScopeFactory _scopeFactory;
     private readonly IMapper _mapper;
     private readonly IValidator<MessageDto> _validator;
-
+    
     public SaveMessageCommandHandler(IServiceScopeFactory scopeFactory, IMapper mapper, IValidator<MessageDto> validator)
     {
         _scopeFactory = scopeFactory;
