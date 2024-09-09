@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1NU8bbQE+OA=",
+  "dgSpecHash": "BZbrk5q0hGs=",
   "success": true,
-  "projectFilePath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/Utils/Utils.csproj",
+  "projectFilePath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/Utils/Utils.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

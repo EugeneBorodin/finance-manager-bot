@@ -582,11 +582,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/DataAccess.Interfaces/DataAccess.Interfaces.csproj",
+      "projectUniqueName": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/DataAccess.Interfaces/DataAccess.Interfaces.csproj",
       "projectName": "DataAccess.Interfaces",
-      "projectPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/DataAccess.Interfaces/DataAccess.Interfaces.csproj",
+      "projectPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/DataAccess.Interfaces/DataAccess.Interfaces.csproj",
       "packagesPath": "/Users/eugeneborodin/.nuget/packages/",
-      "outputPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/DataAccess.Interfaces/obj/",
+      "outputPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/DataAccess.Interfaces/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/eugeneborodin/.nuget/NuGet/NuGet.Config"
@@ -601,8 +601,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/Domain.Entities/Domain.Entities.csproj": {
-              "projectPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/Domain.Entities/Domain.Entities.csproj"
+            "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/Domain.Entities/Domain.Entities.csproj": {
+              "projectPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/Domain.Entities/Domain.Entities.csproj"
             }
           }
         }

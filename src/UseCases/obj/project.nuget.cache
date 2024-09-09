@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "G0XoJiOofBA=",
+  "dgSpecHash": "gAPlmCKfYNk=",
   "success": true,
-  "projectFilePath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/UseCases/UseCases.csproj",
+  "projectFilePath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/UseCases/UseCases.csproj",
   "expectedPackageFiles": [
     "/Users/eugeneborodin/.nuget/packages/automapper/13.0.1/automapper.13.0.1.nupkg.sha512",
     "/Users/eugeneborodin/.nuget/packages/fluentvalidation/11.9.2/fluentvalidation.11.9.2.nupkg.sha512",

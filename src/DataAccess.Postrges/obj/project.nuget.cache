@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SSA35STkDIs=",
+  "dgSpecHash": "Wn+g/6ZZSxQ=",
   "success": true,
-  "projectFilePath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/DataAccess.Postrges/DataAccess.Postrges.csproj",
+  "projectFilePath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/DataAccess.Postrges/DataAccess.Postrges.csproj",
   "expectedPackageFiles": [
     "/Users/eugeneborodin/.nuget/packages/microsoft.entityframeworkcore/8.0.8/microsoft.entityframeworkcore.8.0.8.nupkg.sha512",
     "/Users/eugeneborodin/.nuget/packages/microsoft.entityframeworkcore.abstractions/8.0.8/microsoft.entityframeworkcore.abstractions.8.0.8.nupkg.sha512",

@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Domain.Entities
-build_property.ProjectDir = /Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/Domain.Entities/
+build_property.ProjectDir = /Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/Domain.Entities/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

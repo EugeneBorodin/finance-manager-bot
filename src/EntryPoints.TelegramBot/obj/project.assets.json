@@ -1852,11 +1852,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/EntryPoints.TelegramBot/EntryPoints.TelegramBot.csproj",
+      "projectUniqueName": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/EntryPoints.TelegramBot/EntryPoints.TelegramBot.csproj",
       "projectName": "EntryPoints.TelegramBot",
-      "projectPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/EntryPoints.TelegramBot/EntryPoints.TelegramBot.csproj",
+      "projectPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/EntryPoints.TelegramBot/EntryPoints.TelegramBot.csproj",
       "packagesPath": "/Users/eugeneborodin/.nuget/packages/",
-      "outputPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/EntryPoints.TelegramBot/obj/",
+      "outputPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/EntryPoints.TelegramBot/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/eugeneborodin/.nuget/NuGet/NuGet.Config"
@@ -1871,11 +1871,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/UseCases/UseCases.csproj": {
-              "projectPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/UseCases/UseCases.csproj"
+            "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/UseCases/UseCases.csproj": {
+              "projectPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/UseCases/UseCases.csproj"
             },
-            "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/Utils/Utils.csproj": {
-              "projectPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/Utils/Utils.csproj"
+            "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/Utils/Utils.csproj": {
+              "projectPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/Utils/Utils.csproj"
             }
           }
         }

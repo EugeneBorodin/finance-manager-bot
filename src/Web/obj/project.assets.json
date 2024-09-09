@@ -1999,11 +1999,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/Web/Web.csproj",
+      "projectUniqueName": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/Web/Web.csproj",
       "projectName": "Web",
-      "projectPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/Web/Web.csproj",
+      "projectPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/Web/Web.csproj",
       "packagesPath": "/Users/eugeneborodin/.nuget/packages/",
-      "outputPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/Web/obj/",
+      "outputPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/Web/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/eugeneborodin/.nuget/NuGet/NuGet.Config"
@@ -2018,20 +2018,20 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/DataAccess.Interfaces/DataAccess.Interfaces.csproj": {
-              "projectPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/DataAccess.Interfaces/DataAccess.Interfaces.csproj"
+            "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/DataAccess.Interfaces/DataAccess.Interfaces.csproj": {
+              "projectPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/DataAccess.Interfaces/DataAccess.Interfaces.csproj"
             },
-            "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/DataAccess.Postrges/DataAccess.Postrges.csproj": {
-              "projectPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/DataAccess.Postrges/DataAccess.Postrges.csproj"
+            "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/DataAccess.Postrges/DataAccess.Postrges.csproj": {
+              "projectPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/DataAccess.Postrges/DataAccess.Postrges.csproj"
             },
-            "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/Domain.Entities/Domain.Entities.csproj": {
-              "projectPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/Domain.Entities/Domain.Entities.csproj"
+            "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/Domain.Entities/Domain.Entities.csproj": {
+              "projectPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/Domain.Entities/Domain.Entities.csproj"
             },
-            "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/EntryPoints.TelegramBot/EntryPoints.TelegramBot.csproj": {
-              "projectPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/EntryPoints.TelegramBot/EntryPoints.TelegramBot.csproj"
+            "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/EntryPoints.TelegramBot/EntryPoints.TelegramBot.csproj": {
+              "projectPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/EntryPoints.TelegramBot/EntryPoints.TelegramBot.csproj"
             },
-            "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/Utils/Utils.csproj": {
-              "projectPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/FinanceManager/Utils/Utils.csproj"
+            "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/Utils/Utils.csproj": {
+              "projectPath": "/Users/eugeneborodin/RiderProjects/finance-manager-bot-api/src/Utils/Utils.csproj"
             }
           }
         }
