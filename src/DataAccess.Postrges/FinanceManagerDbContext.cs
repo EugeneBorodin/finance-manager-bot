@@ -6,7 +6,7 @@ namespace DataAccess.Postrges;
 
 public sealed class FinanceManagerDbContext : DbContext, IFinanceManagerDbContext
 {
-    public DbSet<Message> Messages { get; set; }
+    public DbSet<Expense> Expenses { get; set; }
 
     public FinanceManagerDbContext(DbContextOptions<FinanceManagerDbContext> options)
         : base(options)

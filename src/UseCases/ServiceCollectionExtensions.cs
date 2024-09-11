@@ -1,6 +1,7 @@
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using UseCases.Messages.DTO;
+using UseCases.DTO;
+using UseCases.Expenses.Commands;
 using UseCases.Validators;
 
 namespace UseCases;
@@ -11,7 +12,8 @@ public static class ServiceCollectionExtensions
     {
         var assemblies = AppDomain.CurrentDomain.GetAssemblies();
         services.AddAutoMapper(assemblies);
-        services.AddTransient<IValidator<MessageDto>, MessageValidator>();
+        services.AddTransient<IValidator<ExpenseDto>, ExpenseValidator>();
+        services.AddTransient<IValidator<CalculateSummaryCommand>, CalculateSummaryCommandValidator>();
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));
         return services;
     }

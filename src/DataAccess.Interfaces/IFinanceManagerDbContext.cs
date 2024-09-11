@@ -5,7 +5,7 @@ namespace DataAccess.Interfaces;
 
 public interface IFinanceManagerDbContext
 {
-    DbSet<Message> Messages { get; set; }
+    DbSet<Expense> Expenses { get; set; }
     
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

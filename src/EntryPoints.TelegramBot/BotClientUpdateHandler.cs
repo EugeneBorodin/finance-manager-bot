@@ -5,8 +5,9 @@ using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using UseCases.Messages.Commands;
-using UseCases.Messages.DTO;
+using UseCases.DTO;
+using UseCases.Expenses.Commands;
+using DateTimeOffset = System.DateTimeOffset;
 
 namespace EntryPoints.TelegramBot;
 
@@ -39,7 +40,7 @@ public class BotClientUpdateHandler : IUpdateHandler
         {
             if (IsExpenseRecord(message.Text))
             {
-                await SaveMessage(message);
+                await SaveExpense(message);
             
                 await botClient.EditMessageTextAsync(message.Chat.Id,
                     message.MessageId,
@@ -70,12 +71,20 @@ public class BotClientUpdateHandler : IUpdateHandler
         return Task.CompletedTask;
     }
     
-    private async Task SaveMessage(Message message)
+    private async Task SaveExpense(Message message)
     {
         try
         {
-            var messageDto = _mapper.Map<MessageDto>(message);
-            await _mediator.Send(new SaveMessageCommand { MessageDto = messageDto });
+            var expenseRecordParts = message.Text.Split(' ');
+            var expenseDto = new ExpenseDto
+            {
+                Category = expenseRecordParts[0].Substring(1),
+                Value = Convert.ToDecimal(expenseRecordParts[1].Replace('.', ',')),
+                MessageId = message.MessageId,
+                ChannelId = message.Chat.Id,
+                DateTime = new DateTimeOffset(message.Date)
+            };
+            await _mediator.Send(new SaveExpenseCommand { ExpenseDto = expenseDto });
         }
         catch (Exception e)
         {
@@ -86,7 +95,15 @@ public class BotClientUpdateHandler : IUpdateHandler
 
     private async Task<string> ProcessMessage(Message message)
     {
-        return "Обработано";
+        var command = new CalculateSummaryCommand
+        {
+            StartDate = new DateTimeOffset(new DateTime(2024, 09, 01).ToUniversalTime()),
+            EndDate = new DateTimeOffset(new DateTime(2024, 09, 30).ToUniversalTime()),
+            AccountBalance = 315_000,
+            ChannelId = message.Chat.Id
+        };
+        
+        return await _mediator.Send(command);
     }
 
     private bool IsCommand(string command)
@@ -100,6 +117,6 @@ public class BotClientUpdateHandler : IUpdateHandler
     {
         if (string.IsNullOrWhiteSpace(expenseRecord)) return false;
         expenseRecord = expenseRecord.Trim().ToLower();
-        return Regex.IsMatch(expenseRecord, @"^#[\w]+[\s]+[\d]+$");
+        return Regex.IsMatch(expenseRecord, @"^#[\w]+[' ']{1}[\d]+([.,][\d]+)?$");
     }
 }
