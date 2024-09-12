@@ -1,26 +1,25 @@
 using System.Text.RegularExpressions;
-using AutoMapper;
-using MediatR;
+using EntryPoints.TelegramBot.BotCommands;
 using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using UseCases.DTO;
-using UseCases.Expenses.Commands;
-using DateTimeOffset = System.DateTimeOffset;
 
 namespace EntryPoints.TelegramBot;
 
 public class BotClientUpdateHandler : IUpdateHandler
 {
-    private readonly IMediator _mediator;
-    private readonly IMapper _mapper;
-    private readonly string[] _commands = new [] { "/сводка" };
+    private readonly HashSet<string> _commandPatterns =
+    [
+        BotCommandPatterns.CalculateSummary,
+        BotCommandPatterns.SaveExpense,
+    ];
     
-    public BotClientUpdateHandler(IMediator mediator, IMapper mapper)
+    private readonly IBotCommandFactory _commandFactory;
+    
+    public BotClientUpdateHandler(IBotCommandFactory commandFactory)
     {
-        _mediator = mediator;
-        _mapper = mapper;
+        _commandFactory = commandFactory;
     }
 
     public async Task HandleUpdateAsync(ITelegramBotClient botClient,
@@ -38,10 +37,12 @@ public class BotClientUpdateHandler : IUpdateHandler
         
         if (message != null)
         {
-            if (IsExpenseRecord(message.Text))
+            var commandPattern = GetCommandPattern(message.Text);
+            var botCommand = _commandFactory.GetCommand(commandPattern);
+            var responseText = await botCommand.Execute(message);
+
+            if (botCommand is SaveExpenseBotCommand)
             {
-                await SaveExpense(message);
-            
                 await botClient.EditMessageTextAsync(message.Chat.Id,
                     message.MessageId,
                     message.Text + " - " + savedText,
@@ -49,16 +50,9 @@ public class BotClientUpdateHandler : IUpdateHandler
             }
             else
             {
-                string responseText = "К сожалению твой текст не распознан ни как комманда, ни как запись о расходах. Попробуй еще раз";
-                
-                if (IsCommand(message.Text))
-                {
-                    responseText = await ProcessMessage(message);
-                }
-                
                 await botClient.SendTextMessageAsync(message.Chat.Id,
                     responseText,
-                    cancellationToken: cancellationToken);
+                    cancellationToken: cancellationToken);   
             }
         }
     }
@@ -71,52 +65,10 @@ public class BotClientUpdateHandler : IUpdateHandler
         return Task.CompletedTask;
     }
     
-    private async Task SaveExpense(Message message)
+    private string? GetCommandPattern (string command)
     {
-        try
-        {
-            var expenseRecordParts = message.Text.Split(' ');
-            var expenseDto = new ExpenseDto
-            {
-                Category = expenseRecordParts[0].Substring(1),
-                Value = Convert.ToDecimal(expenseRecordParts[1].Replace('.', ',')),
-                MessageId = message.MessageId,
-                ChannelId = message.Chat.Id,
-                DateTime = new DateTimeOffset(message.Date)
-            };
-            await _mediator.Send(new SaveExpenseCommand { ExpenseDto = expenseDto });
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-    }
-
-    private async Task<string> ProcessMessage(Message message)
-    {
-        var command = new CalculateSummaryCommand
-        {
-            StartDate = new DateTimeOffset(new DateTime(2024, 09, 01).ToUniversalTime()),
-            EndDate = new DateTimeOffset(new DateTime(2024, 09, 30).ToUniversalTime()),
-            AccountBalance = 315_000,
-            ChannelId = message.Chat.Id
-        };
-        
-        return await _mediator.Send(command);
-    }
-
-    private bool IsCommand(string command)
-    {
-        if (string.IsNullOrWhiteSpace(command)) return false;
+        if (string.IsNullOrWhiteSpace(command)) return null;
         command = command.Trim().ToLower();
-        return _commands.Contains(command);
-    }
-    
-    private bool IsExpenseRecord(string expenseRecord)
-    {
-        if (string.IsNullOrWhiteSpace(expenseRecord)) return false;
-        expenseRecord = expenseRecord.Trim().ToLower();
-        return Regex.IsMatch(expenseRecord, @"^#[\w]+[' ']{1}[\d]+([.,][\d]+)?$");
+        return _commandPatterns.SingleOrDefault(pattern => Regex.IsMatch(command, pattern));
     }
 }
