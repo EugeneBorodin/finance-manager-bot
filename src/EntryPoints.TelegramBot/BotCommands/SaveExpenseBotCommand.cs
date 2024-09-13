@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.Extensions.Logging;
 using Telegram.Bot.Types;
 using UseCases.DTO;
 using UseCases.Expenses.Commands;
@@ -8,10 +9,12 @@ namespace EntryPoints.TelegramBot.BotCommands;
 public class SaveExpenseBotCommand : IBotCommand
 {
     private readonly IMediator _mediator;
+    private readonly ILogger<SaveExpenseBotCommand> _logger;
     
-    public SaveExpenseBotCommand(IMediator mediator)
+    public SaveExpenseBotCommand(IMediator mediator, ILogger<SaveExpenseBotCommand> logger)
     {
         _mediator = mediator;
+        _logger = logger;
     }
     
     public async Task<string> Execute(Message message)
@@ -29,11 +32,11 @@ public class SaveExpenseBotCommand : IBotCommand
             };
             
             var id = await _mediator.Send(new SaveExpenseCommand { ExpenseDto = expenseDto });
-            return $"Расход сохранен в базу данных. Записи присвоен идентификатор: {id}";
+            return $"Расход сохранен в базу данных. Записи присвоен идентификатор: {id}.";
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            Console.WriteLine(e);
+            _logger.LogError(ex.Message, ex);
             throw;
         }
     }

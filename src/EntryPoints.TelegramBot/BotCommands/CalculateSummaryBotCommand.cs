@@ -1,5 +1,6 @@
 using System.Globalization;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using Telegram.Bot.Types;
 using UseCases.Expenses.Commands;
 
@@ -8,9 +9,11 @@ namespace EntryPoints.TelegramBot.BotCommands;
 public class CalculateSummaryBotCommand : IBotCommand
 {
     private readonly IMediator _mediator;
-    public CalculateSummaryBotCommand(IMediator mediator)
+    private readonly ILogger<CalculateSummaryBotCommand> _logger;
+    public CalculateSummaryBotCommand(IMediator mediator, ILogger<CalculateSummaryBotCommand> logger)
     {
         _mediator = mediator;
+        _logger = logger;
     }
     
     public async Task<string> Execute(Message message)
@@ -34,7 +37,7 @@ public class CalculateSummaryBotCommand : IBotCommand
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex.Message);
+            _logger.LogError(ex.Message, ex);
             throw;
         }
     }

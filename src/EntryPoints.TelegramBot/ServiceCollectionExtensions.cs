@@ -10,8 +10,6 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddTelegramBot(this IServiceCollection services, BotSettings botSettings)
     {
-        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-        
         services
             .AddHttpClient("TelegramBotClient")
             .AddTypedClient<ITelegramBotClient>((client, provider) =>

@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 using EntryPoints.TelegramBot.BotCommands;
+using Microsoft.Extensions.Logging;
 using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
@@ -16,10 +17,12 @@ public class BotClientUpdateHandler : IUpdateHandler
     ];
     
     private readonly IBotCommandFactory _commandFactory;
+    private readonly ILogger<BotClientUpdateHandler> _logger;
     
-    public BotClientUpdateHandler(IBotCommandFactory commandFactory)
+    public BotClientUpdateHandler(IBotCommandFactory commandFactory, ILogger<BotClientUpdateHandler> logger)
     {
         _commandFactory = commandFactory;
+        _logger = logger;
     }
 
     public async Task HandleUpdateAsync(ITelegramBotClient botClient,
@@ -34,8 +37,14 @@ public class BotClientUpdateHandler : IUpdateHandler
             UpdateType.EditedChannelPost => (update.EditedChannelPost, "сохранено снова"),
             _ => (null, null)
         };
+
+        if (message == null)
+        {
+            _logger.LogWarning("Был получен UpdateEvent, который не был обработан. Update: {@update}", update);
+            return;
+        }
         
-        if (message != null)
+        try
         {
             var commandPattern = GetCommandPattern(message.Text);
             var botCommand = _commandFactory.GetCommand(commandPattern);
@@ -47,13 +56,24 @@ public class BotClientUpdateHandler : IUpdateHandler
                     message.MessageId,
                     message.Text + " - " + savedText,
                     cancellationToken: cancellationToken);
+                
+                _logger.LogInformation("{responseText} ChatId: {chatId}", responseText, message.Chat.Id);
             }
             else
             {
                 await botClient.SendTextMessageAsync(message.Chat.Id,
                     responseText,
-                    cancellationToken: cancellationToken);   
+                    cancellationToken: cancellationToken);
             }
+        }
+        catch (Exception ex)
+        {
+            
+            await botClient.SendTextMessageAsync(message.Chat.Id,
+                "Во время обработки запроса произошла ошибка. Проверь введенные данные и попробуй снова.",
+                cancellationToken: cancellationToken);
+            
+            _logger.LogError(ex, ex.Message);
         }
     }
 
@@ -61,8 +81,8 @@ public class BotClientUpdateHandler : IUpdateHandler
     {
         cancellationToken.ThrowIfCancellationRequested();
         
-        Console.WriteLine(exception);
-        return Task.CompletedTask;
+        _logger.LogError(exception.Message, exception);
+        return Task.FromException(exception);
     }
     
     private string? GetCommandPattern (string command)

@@ -5,20 +5,24 @@ using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace UseCases.Expenses.Commands;
 
 public class CalculateSummaryCommandHandler : IRequestHandler<CalculateSummaryCommand, string>
 {
     private readonly IServiceScopeFactory _scopeFactory;
-    private readonly IMapper _mapper;
     private readonly IValidator<CalculateSummaryCommand> _validator;
+    private readonly ILogger<CalculateSummaryCommandHandler> _logger;
     
-    public CalculateSummaryCommandHandler(IServiceScopeFactory scopeFactory, IMapper mapper, IValidator<CalculateSummaryCommand> validator)
+    public CalculateSummaryCommandHandler(
+        IServiceScopeFactory scopeFactory,
+        IValidator<CalculateSummaryCommand> validator,
+        ILogger<CalculateSummaryCommandHandler> logger)
     {
         _scopeFactory = scopeFactory;
-        _mapper = mapper;
         _validator = validator;
+        _logger = logger;
     }
     
     public async Task<string> Handle(CalculateSummaryCommand request, CancellationToken cancellationToken)
@@ -28,6 +32,8 @@ public class CalculateSummaryCommandHandler : IRequestHandler<CalculateSummaryCo
         {
             throw new ValidationException(validationResult.Errors);
         }
+        
+        _logger.LogInformation("Начало формирования сводки по параметрам: {@request}", request);
 
         using (var scope = _scopeFactory.CreateScope())
         {
@@ -53,6 +59,9 @@ public class CalculateSummaryCommandHandler : IRequestHandler<CalculateSummaryCo
             sb.Append("\n");
             sb.Append($"Потрачено денег: {spent}\n");
             sb.Append($"Остаток на балансе: {request.AccountBalance - spent}");
+
+            _logger.LogInformation("Сводка сформирована по параметрам: {@request}. Остаток на балансе: {balance}",
+                request, request.AccountBalance - spent);
             
             return sb.ToString();
         }
