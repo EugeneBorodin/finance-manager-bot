@@ -14,6 +14,7 @@ public class BotClientUpdateHandler : IUpdateHandler
     [
         BotCommandPatterns.CalculateSummary,
         BotCommandPatterns.SaveExpense,
+        BotCommandPatterns.GetHelp,
     ];
     
     private readonly IBotCommandFactory _commandFactory;
@@ -25,7 +26,8 @@ public class BotClientUpdateHandler : IUpdateHandler
         _logger = logger;
     }
 
-    public async Task HandleUpdateAsync(ITelegramBotClient botClient,
+    public async Task HandleUpdateAsync(
+        ITelegramBotClient botClient,
         Update update,
         CancellationToken cancellationToken)
     {

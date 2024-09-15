@@ -23,6 +23,8 @@ public class BotCommandFactory : IBotCommandFactory
             case BotCommandPatterns.SaveExpense:
                 return new SaveExpenseBotCommand(_serviceProvider.GetRequiredService<IMediator>(),
                     _serviceProvider.GetRequiredService<ILogger<SaveExpenseBotCommand>>());
+            case BotCommandPatterns.GetHelp:
+                return new GetHelpBotCommand(_serviceProvider.GetRequiredService<ILogger<GetHelpBotCommand>>());
             default:
                 return new HandleErrorBotCommand(_serviceProvider.GetRequiredService<ILogger<HandleErrorBotCommand>>());
         }
