@@ -52,7 +52,7 @@ public class BotClientUpdateHandler : IUpdateHandler
             var botCommand = _commandFactory.GetCommand(commandPattern);
             var responseText = await botCommand.Execute(message);
 
-            if (botCommand is SaveExpenseBotCommand)
+            if (commandPattern == BotCommandPatterns.SaveExpense)
             {
                 await botClient.EditMessageTextAsync(message.Chat.Id,
                     message.MessageId,
