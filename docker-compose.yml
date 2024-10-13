@@ -20,7 +20,7 @@ services:
     volumes:
         - /tmp/pgdata_scheduler:/var/lib/postgresql/data:rw
     ports:
-      - 6432:6432
+      - 5431:5432
       
   web:
     build:
