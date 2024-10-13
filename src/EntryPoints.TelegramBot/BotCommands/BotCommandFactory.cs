@@ -1,3 +1,4 @@
+using Jobs.Infrastructure;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -25,6 +26,10 @@ public class BotCommandFactory : IBotCommandFactory
                     _serviceProvider.GetRequiredService<ILogger<SaveExpenseBotCommand>>());
             case BotCommandPatterns.GetHelp:
                 return new GetHelpBotCommand(_serviceProvider.GetRequiredService<ILogger<GetHelpBotCommand>>());
+            case BotCommandPatterns.ScheduleDailySummaryCalculation:
+                return new ScheduleDailySummaryCalculationBotCommand(
+                    _serviceProvider.GetRequiredService<ILogger<ScheduleDailySummaryCalculationBotCommand>>(),
+                    _serviceProvider.GetRequiredService<IRecurringJobScheduler>());
             default:
                 return new HandleErrorBotCommand(_serviceProvider.GetRequiredService<ILogger<HandleErrorBotCommand>>());
         }

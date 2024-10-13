@@ -12,6 +12,8 @@
       <ProjectReference Include="..\DataAccess.Postrges\DataAccess.Postrges.csproj" />
       <ProjectReference Include="..\Domain.Entities\Domain.Entities.csproj" />
       <ProjectReference Include="..\EntryPoints.TelegramBot\EntryPoints.TelegramBot.csproj" />
+      <ProjectReference Include="..\Jobs.Hangfire\Jobs.Hangfire.csproj" />
+      <ProjectReference Include="..\Jobs\Jobs.csproj" />
       <ProjectReference Include="..\Utils\Utils.csproj" />
     </ItemGroup>
 
