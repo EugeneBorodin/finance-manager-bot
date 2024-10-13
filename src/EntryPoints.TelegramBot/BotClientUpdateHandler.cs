@@ -15,6 +15,7 @@ public class BotClientUpdateHandler : IUpdateHandler
         BotCommandPatterns.CalculateSummary,
         BotCommandPatterns.SaveExpense,
         BotCommandPatterns.GetHelp,
+        BotCommandPatterns.ScheduleDailySummaryCalculation,
     ];
     
     private readonly IBotCommandFactory _commandFactory;
