@@ -3,7 +3,8 @@ version: '3'
 services:
 
   postgres:
-    image: postgres
+    image: postgres:16
+    container_name: postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -13,7 +14,8 @@ services:
       - 5432:5432
 
   scheduler:
-    image: postgres
+    image: postgres:16
+    container_name: scheduler
     environment:
       POSTGRES_USER: ${POSTGRES_SCHEDULER_USER}
       POSTGRES_PASSWORD: ${POSTGRES_SCHEDULER_PASSWORD}
@@ -21,6 +23,8 @@ services:
         - /tmp/pgdata_scheduler:/var/lib/postgresql/data:rw
     ports:
       - 5431:5432
+    depends_on:
+      - postgres
       
   web:
     build:
@@ -30,9 +34,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - USER_SECRETS_ID=${USER_SECRETS_ID}
     volumes:
-      - $HOME/.microsoft/usersecrets/${USER_SECRETS_ID}:/root/.microsoft/usersecrets/${USER_SECRETS_ID}
+      - $HOME/.microsoft/usersecrets/${USER_SECRETS_ID}:/root/.microsoft/usersecrets/${USER_SECRETS_ID}:rw
     ports:
       - 5000:5000
     depends_on:
-      - postgres
       - scheduler

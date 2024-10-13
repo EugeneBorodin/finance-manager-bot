@@ -23,8 +23,8 @@ public class ScheduleDailySummaryCalculationBotCommand : IBotCommand
         try
         {
             var commandParts = message.Text.Split(' ');
-            
-            var timeParts = commandParts[1].Split(':');
+            var time = commandParts[1];
+            var timeParts = time.Split(':');
             var hour = Convert.ToInt32(timeParts[0]);
             var minute = Convert.ToInt32(timeParts[1]);
             var startDateTime = DateTime.Parse(commandParts[2], new CultureInfo("ru-RU")).ToUniversalTime();
@@ -43,7 +43,7 @@ public class ScheduleDailySummaryCalculationBotCommand : IBotCommand
                 }, cronExpression);
 
             var responseText =
-                $"Процесс запланирован. Теперь ежедневно в {hour}:{minute} будет отправляться сводка о расходах по категориям и остатке с указанными выше параметрами.";
+                $"Процесс запланирован. Теперь ежедневно в {time} будет отправляться сводка о расходах по категориям и остатке с указанными выше параметрами.";
             
             return Task.FromResult(responseText);
         }
