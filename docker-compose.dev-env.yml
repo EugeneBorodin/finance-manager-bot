@@ -11,13 +11,3 @@ services:
         - /tmp/pgdata:/var/lib/postgresql/data:rw
     ports:
       - 5432:5432
-
-  scheduler:
-    image: postgres
-    environment:
-      POSTGRES_USER: ${POSTGRES_SCHEDULER_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_SCHEDULER_PASSWORD}
-    volumes:
-        - /tmp/pgdata_scheduler:/var/lib/postgresql/data:rw
-    ports:
-      - 5431:5432
