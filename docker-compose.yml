@@ -23,6 +23,6 @@ services:
     volumes:
       - ./user-secrets:/root/.microsoft/usersecrets/${USER_SECRETS_ID}:rw
     ports:
-      - 5000:5000
+      - 5001:5001
     depends_on:
       - postgres
