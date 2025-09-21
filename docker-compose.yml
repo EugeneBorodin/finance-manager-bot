@@ -1,28 +1,13 @@
 version: '3'
 
-services:
-
-  postgres:
-    image: postgres:16
-    container_name: postgres
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    volumes:
-        - /tmp/pgdata:/var/lib/postgresql/data:rw
-    ports:
-      - 5432:5432
-      
+services:      
   web:
     build:
       dockerfile: Dockerfile
       context: src/.
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - USER_SECRETS_ID=${USER_SECRETS_ID}
-    volumes:
-      - ./user-secrets:/root/.microsoft/usersecrets/${USER_SECRETS_ID}:rw
+      - BotSettings__ApiToken=${BOT_TOKEN}
+      - DataBaseSettings__ConnectionString=${BOT_DB_CONNECTION_STRING}
+      - JobSchedulerSettings__ConnectionString=${JOB_SCHEDULER_DB_CONNECTION_STRING}
     ports:
       - 5001:5001
-    depends_on:
-      - postgres
